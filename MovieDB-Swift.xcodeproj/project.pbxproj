@@ -16,6 +16,7 @@
 		75F8E9E5242A876D00EDA370 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F8E9E3242A876D00EDA370 /* Movie.m */; };
 		75F8E9EA242A8F7B00EDA370 /* MovieDBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 75F8E9E9242A8F7B00EDA370 /* MovieDBRequest.m */; };
 		75F8E9ED242AC6FE00EDA370 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F8E9EC242AC6FE00EDA370 /* MovieTableViewCell.swift */; };
+		75FF9CA4242BE2AD00166C32 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF9CA3242BE2AD00166C32 /* MovieDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		75F8E9E8242A8F7B00EDA370 /* MovieDBRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDBRequest.h; sourceTree = "<group>"; };
 		75F8E9E9242A8F7B00EDA370 /* MovieDBRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDBRequest.m; sourceTree = "<group>"; };
 		75F8E9EC242AC6FE00EDA370 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
+		75FF9CA3242BE2AD00166C32 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				75F8E9C4242A800300EDA370 /* MoviesTableViewController.swift */,
 				75F8E9EC242AC6FE00EDA370 /* MovieTableViewCell.swift */,
+				75FF9CA3242BE2AD00166C32 /* MovieDetailViewController.swift */,
 			);
 			path = Cntrollers;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				75F8E9C1242A800300EDA370 /* AppDelegate.swift in Sources */,
 				75F8E9ED242AC6FE00EDA370 /* MovieTableViewCell.swift in Sources */,
 				75F8E9EA242A8F7B00EDA370 /* MovieDBRequest.m in Sources */,
+				75FF9CA4242BE2AD00166C32 /* MovieDetailViewController.swift in Sources */,
 				75F8E9E5242A876D00EDA370 /* Movie.m in Sources */,
 				75F8E9C3242A800300EDA370 /* SceneDelegate.swift in Sources */,
 			);

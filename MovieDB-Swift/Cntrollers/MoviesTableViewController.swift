@@ -10,6 +10,9 @@ import UIKit
 
 class MoviesTableViewController: UITableViewController {
     
+    // MARK: - Constants
+    fileprivate let DETAIL_SEGUE_ID = "detail"
+    
     //MARK: - Variables
     var popularMovies: [Movie] = []
     var nowPlayingMovies: [Movie] = []
@@ -20,6 +23,8 @@ class MoviesTableViewController: UITableViewController {
     var currentSearchTask: URLSessionTask?
     var searchController: UISearchController = UISearchController()
     var showldDisplaySearch: Bool = false
+    
+    // MARK: - Computed Variables
     
     
     // MARK: - Lifecycle
@@ -91,11 +96,18 @@ class MoviesTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-            
         }
-        
     }
+}
+
+// MARK: - Segue
+extension MoviesTableViewController {
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        guard let movieDetailVC = segue.destination as? MovieDetailViewController else { return }
+        movieDetailVC.movie = selectedMovie
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -169,6 +181,30 @@ extension MoviesTableViewController {
         cell?.configure(with: movie)
         
         return cell ?? UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var movieList: [Movie]
+        
+        if showldDisplaySearch {
+            
+            movieList = searchedMovies
+            
+        } else {
+            
+            switch (indexPath.section) {
+                case 0: movieList = popularMovies
+                case 1: movieList = nowPlayingMovies
+                default: movieList = []
+            }
+            
+        }
+        
+        let movie = movieList[indexPath.row]
+        selectedMovie = movie
+        
+        performSegue(withIdentifier: DETAIL_SEGUE_ID, sender: nil)
     }
     
 }

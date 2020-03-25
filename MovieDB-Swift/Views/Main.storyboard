@@ -114,7 +114,7 @@
         <!--Movie Detail-->
         <scene sceneID="JGK-M1-Dif">
             <objects>
-                <viewController id="wp8-YR-wGs" customClass="MovieDetailViewController" sceneMemberID="viewController">
+                <viewController id="wp8-YR-wGs" customClass="MovieDetailViewController" customModule="MovieDB_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2lV-nT-wjN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -204,6 +204,12 @@
                         <viewLayoutGuide key="safeArea" id="fhs-L9-E4V"/>
                     </view>
                     <navigationItem key="navigationItem" title="Movie Detail" largeTitleDisplayMode="never" id="fhA-9A-qpN"/>
+                    <connections>
+                        <outlet property="movieCoverImageView" destination="ogE-Vo-Gkv" id="5SF-e5-KWM"/>
+                        <outlet property="movieOverviewTextView" destination="6I9-Cr-HzH" id="x2n-II-aJc"/>
+                        <outlet property="movieRatingLabel" destination="a5i-6C-MMs" id="zRP-jN-d9D"/>
+                        <outlet property="movieTitleLabel" destination="pkx-dt-z3n" id="3sj-cK-vfn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UA7-pP-VmL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
