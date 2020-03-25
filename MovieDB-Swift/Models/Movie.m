@@ -21,6 +21,9 @@
         NSNumber *rating = dictionary[@"vote_average"];
         NSString *imageUrl = dictionary[@"poster_path"];
 
+        if (imageUrl == (NSString *) [NSNull null]) {
+            imageUrl = nil;
+        }
         
         self.title = title;
         self.overview = overview;

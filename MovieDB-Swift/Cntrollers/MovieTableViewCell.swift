@@ -48,6 +48,7 @@ class MovieTableViewCell: UITableViewCell {
         
         print("Will load cover for: \(movie.title)")
         
+        
         guard let imageUrl = movie.imageUrl else {
             print("No cover image available")
             movieCoverImageView.image = nil

@@ -98,6 +98,45 @@ class MoviesTableViewController: UITableViewController {
             }
         }
     }
+    
+    func searchForMovies(query: String) {
+        
+        /*
+         In case there is a search in progress,
+         it is cancelled, in order to save data
+         download and parsing.
+         */
+        currentSearchTask?.cancel()
+        
+        searchedMovies.removeAll()
+        
+        searchController.searchBar.setShowsCancelButton(true, animated: true)
+        
+        currentSearchTask = MovieDBRequest.searchMovies(withQuery: query) {
+            result in
+            
+            guard let movies = result as? [Movie] else {return}
+            self.searchedMovies = movies
+            
+            self.showldDisplaySearch = true
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    func cancelSearch() {
+        
+        currentSearchTask?.cancel()
+        searchedMovies.removeAll()
+        
+        showldDisplaySearch = false
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
 // MARK: - Segue
@@ -217,10 +256,40 @@ extension MoviesTableViewController {
 // MARK: - UISearchControllerDelegate
 extension MoviesTableViewController: UISearchBarDelegate {
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.setShowsCancelButton(false, animated: true)
+        
+        searchBar.text = ""
+        
+        cancelSearch()
+        
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty {
+            cancelSearch()
+        } else {
+            searchForMovies(query: searchText)
+        }
+    }
 }
 
 // MARK: - UITextFieldDelegate
 extension MoviesTableViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
     
 }
 
