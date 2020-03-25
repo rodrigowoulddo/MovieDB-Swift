@@ -48,7 +48,6 @@ class MovieTableViewCell: UITableViewCell {
         
         print("Will load cover for: \(movie.title)")
         
-        
         guard let imageUrl = movie.imageUrl else {
             print("No cover image available")
             movieCoverImageView.image = nil
@@ -61,13 +60,21 @@ class MovieTableViewCell: UITableViewCell {
             
             guard let data = data else {
                 print("Image data response was NULL")
-                self.movieCoverImageView.image = nil
+                
+                DispatchQueue.main.async {
+                    self.movieCoverImageView.image = nil
+                }
+                
                 return
             }
             
             guard let image = UIImage(data: data) else {
                 print("Error converting data response to image")
-                self.movieCoverImageView.image = nil
+                
+                DispatchQueue.main.async {
+                    self.movieCoverImageView.image = nil
+                }
+                
                 return
             }
             

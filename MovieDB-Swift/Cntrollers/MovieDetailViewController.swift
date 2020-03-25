@@ -59,13 +59,21 @@ class MovieDetailViewController: UIViewController {
             
             guard let data = data else {
                 print("Image data response was NULL")
-                self.movieCoverImageView.image = nil
+
+                DispatchQueue.main.async {
+                    self.movieCoverImageView.image = nil
+                }
+                
                 return
             }
             
             guard let image = UIImage(data: data) else {
                 print("Error converting data response to image")
-                self.movieCoverImageView.image = nil
+
+                DispatchQueue.main.async {
+                    self.movieCoverImageView.image = nil
+                }
+                
                 return
             }
             
