@@ -84,11 +84,11 @@ NSString *baseImageURL = @"https://image.tmdb.org/t/p/";
     
 }
 
-+ (void) getNowPlayingMoviesWithHandler:(void (^)(NSMutableArray<Movie *> *))handler {
-    
++ (void) getNowPlayingMoviesAtPage:(int) page andHandler: (void (^)(NSMutableArray<Movie *> *))handler {
+        
     NSLog(@"Searching for popular movies");
     
-    NSURL *url = [NSURL URLWithString: nowPlayingMoviesBaseUrl];
+    NSURL *url = [NSURL URLWithString: [nowPlayingMoviesBaseUrl stringByAppendingFormat:@"&page=%i", page]];
     
     NSLog(@"Sending request: %@", url);
     

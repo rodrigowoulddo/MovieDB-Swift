@@ -22,7 +22,7 @@ typedef enum {
 @interface MovieDBRequest: NSObject
 
 + (void) getPopularMoviesWithHandler:(void (^)(NSMutableArray<Movie *> *))handler;
-+ (void) getNowPlayingMoviesWithHandler:(void (^)(NSMutableArray<Movie *> *))handler;
++ (void) getNowPlayingMoviesAtPage:(int) page andHandler: (void (^)(NSMutableArray<Movie *> *))handler;
 + (NSURLSessionTask *) getMovieImageDataFromPath:(NSString *)movieImagePath andSize:(ImageSize) imageSize andHandler:(void (^)(NSData *))handler;
 + (NSURLSessionTask *) searchMoviesWithQuery:(NSString *)query andHandler:(void (^)(NSMutableArray *))handler;
 

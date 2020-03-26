@@ -18,6 +18,8 @@ class MoviesTableViewController: UITableViewController {
     var nowPlayingMovies: [Movie] = []
     var searchedMovies: [Movie] = []
     
+    var currentPage: Int32 = 1
+    
     var selectedMovie: Movie?
     
     var currentSearchTask: URLSessionTask?
@@ -35,6 +37,7 @@ class MoviesTableViewController: UITableViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         
         setupSearchBar()
+        setupTableView()
         loadMovies()
     }
     
@@ -59,8 +62,8 @@ class MoviesTableViewController: UITableViewController {
     }
     
     func setupTableView() {
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 150, right: 0)
+
     }
     
     func loadMovies() {
@@ -81,7 +84,7 @@ class MoviesTableViewController: UITableViewController {
         }
         
         dispatchGroup.enter()
-        MovieDBRequest.getNowPlayingMovies {
+        MovieDBRequest.getNowPlayingMovies(atPage: currentPage) {
             result in
             
             guard let movies = result as? [Movie] else {return}
@@ -97,6 +100,24 @@ class MoviesTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    func loadNextPage() {
+        
+        currentPage += 1
+        
+        MovieDBRequest.getNowPlayingMovies(atPage: currentPage) {
+            result in
+            
+            guard let movies = result as? [Movie] else {return}
+            self.nowPlayingMovies.append(contentsOf: movies)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.tableView.reloadData()
+            }
+            
+        }
+        
     }
     
     func searchForMovies(query: String) {
@@ -217,7 +238,24 @@ extension MoviesTableViewController {
         
         let movie = movieList[indexPath.row]
         
-        cell?.configure(with: movie)
+//
+//        if (indexPath.section == 1 && indexPath.row > movieList.count - 21) {
+//            cellFadeType = .total
+//
+//        } else if (indexPath.row > movieList.count - 21 && currentPage == 1) {
+//            cellFadeType = .total
+//
+//        } else if (showldDisplaySearch) {
+//            cellFadeType = .total
+//
+//        } else {
+//            cellFadeType = .none
+//
+//        }
+//
+        let fade = (indexPath.row > movieList.count - 21 && (currentPage == 1 || indexPath.section == 1)) || showldDisplaySearch
+        
+        cell?.configure(with: movie, fade: fade)
         
         return cell ?? UITableViewCell()
     }
@@ -244,6 +282,21 @@ extension MoviesTableViewController {
         selectedMovie = movie
         
         performSegue(withIdentifier: DETAIL_SEGUE_ID, sender: nil)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        /// Returns if the current list is not now playing
+        if showldDisplaySearch { return }
+        if indexPath.section == 0 { return }
+        
+        /// If it is the last cell
+        if indexPath.row == nowPlayingMovies.count - 5 {
+            
+            loadNextPage()
+            
+        }
+        
     }
     
 }
