@@ -23,6 +23,7 @@ class MoviesTableViewController: UITableViewController {
     var selectedMovie: Movie?
     
     var currentSearchTask: URLSessionTask?
+    
     var searchController: UISearchController = UISearchController()
     var showldDisplaySearch: Bool = false
     
@@ -131,6 +132,8 @@ class MoviesTableViewController: UITableViewController {
         
         searchedMovies.removeAll()
         
+        /// ...
+        
         searchController.searchBar.setShowsCancelButton(true, animated: true)
         
         currentSearchTask = MovieDBRequest.searchMovies(withQuery: query) {
@@ -238,21 +241,6 @@ extension MoviesTableViewController {
         
         let movie = movieList[indexPath.row]
         
-//
-//        if (indexPath.section == 1 && indexPath.row > movieList.count - 21) {
-//            cellFadeType = .total
-//
-//        } else if (indexPath.row > movieList.count - 21 && currentPage == 1) {
-//            cellFadeType = .total
-//
-//        } else if (showldDisplaySearch) {
-//            cellFadeType = .total
-//
-//        } else {
-//            cellFadeType = .none
-//
-//        }
-//
         let fade = (indexPath.row > movieList.count - 21 && (currentPage == 1 || indexPath.section == 1)) || showldDisplaySearch
         
         cell?.configure(with: movie, fade: fade)
