@@ -279,7 +279,7 @@ extension MoviesTableViewController {
         if indexPath.section == 0 { return }
         
         /// If it is the last cell
-        if indexPath.row == nowPlayingMovies.count - 5 {
+        if indexPath.row == nowPlayingMovies.count - 1 {
             
             loadNextPage()
             
