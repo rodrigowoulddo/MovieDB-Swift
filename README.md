@@ -23,6 +23,7 @@ The Objeective-C version of this app can be found [here](https://github.com/rodr
 * Async Objective-C API call
 * API response await with dispatch group
 * Assync image loading
+* Image caching with NSCache
 * Pagination on TableView
 
 ## Licence
